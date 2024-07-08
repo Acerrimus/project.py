@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 
 
 country_list =  {
-
+     
     'usa': 'USD',  # United States Dollar
     'italy': 'EUR',  # Euro
     'france': 'EUR',  # Euro
@@ -64,13 +64,13 @@ parser.add_argument('-c')
 parser.add_argument('-i', default='econ')
 args = parser.parse_args()
 
-
+key = 'A4JSMHQUEASHWS4Q'
 def main():
 
     # If no arguments are given when running, prompt for them.
 
     if len(sys.argv) == 1:
-
+        
         country = input("Country to research: ").lower().strip()
         infoType = input ("What kind of info?   -econ   -news   -politic \n")
 
@@ -99,13 +99,13 @@ def main():
 
 def econ(country):
         try:
-            coin = country_list[country]
-
+            coin = country_list[country]  
+        
         except KeyError:
              print("Country does not exist")
              pass
 
-        url = f'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={coin}&to_currency=GBP&apikey=A4JSMHQUEASHWS4Q'
+        url = f'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={coin}&to_currency=GBP&apikey={key}'
 
         r = requests.get(url)
         data = r.json()
@@ -119,7 +119,7 @@ def econ(country):
 
 def news(country):
 
-        url = f'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics={country}&tickers=AAPL&apikey=A4JSMHQUEASHWS4Q'
+        url = f'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics={country}&tickers=AAPL&apikey={key}'
         r = requests.get(url)
         data = r.json()
 
@@ -127,14 +127,14 @@ def news(country):
             output = [article['title'] for article in data['feed']]
             for _ in range(10):
                 print(f"{_}. {output[_]}\n")
-
+            
         except KeyError:
             print("Country does not exist")
             pass
 
 def crypto():
         coin = input("What coin do you want? :").strip()
-        cryptourl = f'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={coin}&to_currency=GBP&apikey=A4JSMHQUEASHWS4Q'
+        cryptourl = f'https://www.alphavantage.co/query?function=CURRENCY_EXCHANGE_RATE&from_currency={coin}&to_currency=GBP&apikey={key}'
 
         r = requests.get(cryptourl)
         data = r.json()
