@@ -84,6 +84,9 @@ def econ(country, graph='y'):
         
         # url = f'http://stats.oecd.org/SDMX-JSON/data/<dataset identifier>/<filter expression>/<agency name>[ ?<additional parameters>]'
         
+
+        # Graph display area (This one uses plotly instead of matplot)
+
         if not(graph):
             graph = (input("Display graph? [Y/N]").lower() == 'y')
 
@@ -108,9 +111,8 @@ def econ(country, graph='y'):
                             yaxis_title='Exchange Rate')
 
             fig.show()
-        
-
             graph = False
+            ...
 
 def news(country):
         
@@ -147,8 +149,6 @@ def crypto():
         except KeyError:
             print("Coin does not exist")
             pass
-
-
 
 if __name__ == "__main__":
      main()
